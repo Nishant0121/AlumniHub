@@ -17,7 +17,7 @@ export default function Layout() {
         <div
           className={` ${
             isOpenMenu ? "flex" : "hidden"
-          } fixed top-0 left-0 bg-white min-w-[40vw]`}
+          } fixed top-0 left-0 min-h-[100vh] min-w-[40vw] bg-white shadow-md`}
         >
           <VerticleMenu className="" />
         </div>
@@ -35,7 +35,7 @@ export default function Layout() {
       >
         <BotMessageSquare />
       </button>
-      <dialog id="my_modal_3" className="modal">
+      <dialog id="my_modal_3" className="modal ">
         <ChatBot />
       </dialog>
     </div>
