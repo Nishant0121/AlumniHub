@@ -67,6 +67,7 @@ const alumniSchema = new mongoose.Schema({
     type: String,
     default: "alumni",
   },
+  connections: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
 
 const Alumni = mongoose.model("Alumni", alumniSchema);

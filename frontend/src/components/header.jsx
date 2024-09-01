@@ -11,7 +11,7 @@ import Notification from "./notification.jsx";
 import { Link } from "react-router-dom";
 
 export default function Header() {
-  const { isOpenMenu, setIsOpenMenu } = useContext(AppContext);
+  const { isOpenMenu, setIsOpenMenu, authUser } = useContext(AppContext);
 
   const handleMenu = () => {
     setIsOpenMenu(!isOpenMenu);
@@ -36,9 +36,20 @@ export default function Header() {
               <Bell />
             </label>
           </div>
-          <Link to={"/login"} className="px-1.5 w-fit mx-1.5">
+          {authUser ? (
+            ""
+          ) : (
+            <button
+              className="inline-flex h-10 items-center justify-center rounded-md mx-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+              onClick={() => document.getElementById("my_modal_1").showModal()}
+            >
+              <CircleUserRound />
+            </button>
+          )}
+
+          {/* <Link to={"/login"} className="px-1.5 w-fit mx-1.5">
             <CircleUserRound />
-          </Link>
+          </Link> */}
           <div className="drawer-side z-50">
             <label
               htmlFor="my-drawer"
@@ -64,6 +75,24 @@ export default function Header() {
           </button>
         </div>
       </div>
+      <dialog id="my_modal_1" className="modal">
+        <div className="modal-box bg-white">
+          <div className=" flex flex-col gap-4">
+            <Link to={"/login"} className=" p-3 rounded-lg bg-indigo-500">
+              Start as Student
+            </Link>
+            <Link to={"/loginalumni"} className=" p-3 rounded-lg bg-indigo-500">
+              Start as Alumni
+            </Link>
+          </div>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </header>
   );
 }

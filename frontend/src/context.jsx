@@ -16,8 +16,8 @@ export const AppProvider = ({ children }) => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    setAuthUser(localStorage.getItem("token"));
-  });
+    setAuthUser(JSON.parse(localStorage.getItem("user")));
+  }, []);
 
   return (
     <AppContext.Provider

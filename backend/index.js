@@ -28,9 +28,12 @@ mongoose
 
 // Import routes
 const authRoutes = require("./routes/authroutes.js");
+const usersRoutes = require("./routes/usersroutes.js");
 
 // Use routes
 app.use("/api/auth", authRoutes);
+
+app.use("/api/users", usersRoutes);
 
 const PORT = process.env.PORT || 4000;
 

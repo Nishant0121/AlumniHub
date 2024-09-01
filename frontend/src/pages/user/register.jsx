@@ -68,7 +68,7 @@ export default function Register() {
         </h1>
 
         <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
-          Please fill out the form below to create a new account.
+          Please fill out the form below to create a new Student account.
         </p>
 
         <p className="text-center text-lg font-medium">Register</p>

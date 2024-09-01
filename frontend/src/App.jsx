@@ -10,6 +10,10 @@ import { AppContext } from "./context";
 import Landing from "./pages/landing";
 import LoginAlumni from "./pages/alumni/login";
 import RegisterAlumni from "./pages/alumni/register";
+import Profile from "./pages/profile";
+import AllUsers from "./pages/allusers";
+import IndividualProfile from "./pages/individualprofile";
+import Connections from "./pages/connections";
 
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
@@ -34,20 +38,44 @@ function App() {
           <Route index element={<h1>About</h1>} />
         </Route>
         <Route
+          path="/profile"
+          element={authUser ? <Layout /> : <Navigate to={"/login"} />}
+        >
+          <Route index element={<Profile />} />
+        </Route>
+        <Route
+          path="/allusers"
+          element={authUser ? <Layout /> : <Navigate to={"/login"} />}
+        >
+          <Route index element={<AllUsers />} />
+        </Route>
+        <Route
+          path="/user/:userID"
+          element={authUser ? <Layout /> : <Navigate to={"/login"} />}
+        >
+          <Route index element={<IndividualProfile />} />
+        </Route>
+        <Route
+          path="/myconnections"
+          element={authUser ? <Layout /> : <Navigate to={"/login"} />}
+        >
+          <Route index element={<Connections />} />
+        </Route>
+        <Route
           path="/login"
-          element={authUser ? <Navigate to={"/home"} /> : <Login />}
+          element={authUser ? <Navigate to={"/profile"} /> : <Login />}
         />
         <Route
           path="/register"
-          element={authUser ? <Navigate to={"/home"} /> : <Register />}
+          element={authUser ? <Navigate to={"/profile"} /> : <Register />}
         />
         <Route
           path="/loginalumni"
-          element={authUser ? <Navigate to={"/home"} /> : <LoginAlumni />}
+          element={authUser ? <Navigate to={"/profile"} /> : <LoginAlumni />}
         />
         <Route
           path="/registeralumni"
-          element={authUser ? <Navigate to={"/home"} /> : <RegisterAlumni />}
+          element={authUser ? <Navigate to={"/profile"} /> : <RegisterAlumni />}
         />
       </Routes>
     </div>

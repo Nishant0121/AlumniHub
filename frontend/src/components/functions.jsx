@@ -1,14 +1,17 @@
 import { BookOpenCheck, GraduationCap, UserRoundSearch } from "lucide-react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AppContext } from "../context";
 
 export default function Functions() {
+  const { authUser } = useContext(AppContext);
   return (
     <section>
       <div className="max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-2 lg:items-center lg:gap-x-16">
           <div className="relative h-full rounded-md w-full">
             <img
-              className="z-0 w-full h-full rounded-md object-cover"
+              className="z-0 w-full h-[60vh] rounded-md object-cover"
               src="https://firebasestorage.googleapis.com/v0/b/the-gallery-3c000.appspot.com/o/images%2F1725071884674Designer%20(1).png?alt=media&token=c0776c5a-4f92-48dd-97fe-407e8c6dd095"
               alt=""
             />
@@ -33,20 +36,37 @@ export default function Functions() {
           </div>
 
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-            <a
-              className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
-              href="#"
-            >
-              <span className="inline-block rounded-lg bg-indigo-50 p-3">
-                <UserRoundSearch />
-              </span>
+            {authUser.userType === "user" ? (
+              <Link
+                className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+                to={"/allusers"}
+              >
+                <span className="inline-block rounded-lg bg-indigo-50 p-3">
+                  <UserRoundSearch />
+                </span>
 
-              <h2 className="mt-2 font-bold">Connect</h2>
+                <h2 className="mt-2 font-bold">Connect</h2>
 
-              <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                Connect with Alumni of your Institution.
-              </p>
-            </a>
+                <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+                  Connect with Alumni of your Institution.
+                </p>
+              </Link>
+            ) : (
+              <button
+                className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+                onClick={() => document.getElementById("request").showModal()}
+              >
+                <span className="inline-block rounded-lg bg-indigo-50 p-3">
+                  <UserRoundSearch />
+                </span>
+
+                <h2 className="mt-2 font-bold">Connection Request</h2>
+
+                <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+                  See the pending connection requests.
+                </p>
+              </button>
+            )}
 
             <a
               className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
@@ -111,6 +131,20 @@ export default function Functions() {
           </div>
         </div>
       </div>
+      <dialog id="request" className="modal">
+        <div className="modal-box bg-white">
+          <h3 className="font-bold text-lg">Hello!</h3>
+          <p className="py-4">
+            Press ESC key or click the button below to close
+          </p>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </section>
   );
 }

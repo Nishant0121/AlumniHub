@@ -44,7 +44,7 @@ const userSchema = new mongoose.Schema({
   },
   socialAccounts: {
     type: String,
-    default: "", // Defaults to an empty object
+    default: "", // Defaults to an empty string
   },
   profilePic: {
     type: String, // URL to the profile picture
@@ -58,6 +58,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "user",
   },
+  connections: [{ type: mongoose.Schema.Types.ObjectId, ref: "Alumni" }], // Array of user IDs
 });
 
 const User = mongoose.model("User", userSchema);

@@ -1,6 +1,20 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { AppContext } from "../context";
+import { useContext } from "react";
 
 export default function VerticleMenu() {
+  const navigate = useNavigate();
+  const { authUser } = useContext(AppContext);
+  const logoutUser = (e) => {
+    e.preventDefault();
+    // Remove user and token from local storage
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+
+    navigate("/");
+    window.location.reload();
+  };
   return (
     <div className=" rounded-md w-full mr-2">
       <div className="flow-root w-full">
@@ -9,27 +23,38 @@ export default function VerticleMenu() {
             <ul className="space-y-1">
               <li>
                 <Link
-                  href="#"
+                  to={"/home"}
                   className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
                 >
                   Home
                 </Link>
                 <Link
-                  href="#"
+                  to={"/profile"}
                   className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
                 >
                   Profile
                 </Link>
               </li>
 
-              <li>
-                <Link
-                  href="#"
-                  className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
-                >
-                  Team
-                </Link>
-              </li>
+              {authUser.userType === "user" ? (
+                <li>
+                  <Link
+                    to={"/allusers"}
+                    className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
+                  >
+                    All Alumni
+                  </Link>
+                </li>
+              ) : (
+                <li>
+                  <Link
+                    className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
+                    to={"/allusers"}
+                  >
+                    All Students
+                  </Link>
+                </li>
+              )}
 
               <li>
                 <Link
@@ -92,7 +117,7 @@ export default function VerticleMenu() {
           </li>
 
           <li className="py-2">
-            <form action="#">
+            <form onSubmit={logoutUser}>
               <button
                 type="submit"
                 className="block w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-700 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
