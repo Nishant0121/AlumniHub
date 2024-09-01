@@ -42,7 +42,7 @@ export default function Register() {
       ),
       interests: inputs.interests.split(",").map((interest) => interest.trim()),
       socialAccounts: inputs.socialAccounts,
-      profilePic: inputs.profilePic,
+      profilePic: inputs.profilePic || "",
       achievements: inputs.achievements
         .split(",")
         .map((achievement) => achievement.trim()),
@@ -223,25 +223,11 @@ export default function Register() {
               type="text"
               id="socialAccounts"
               name="socialAccounts"
+              required="true"
               value={inputs.socialAccounts}
               onChange={handleChange}
               className="w-full text-white rounded-lg border-gray-200 p-4 text-sm shadow-sm"
-              placeholder="Enter your social accounts (optional)"
-            />
-          </div>
-
-          <div className="flex flex-col m-0 items-start justify-center">
-            <label htmlFor="profilePic" className="text-black">
-              Profile Picture URL
-            </label>
-            <input
-              type="text"
-              id="profilePic"
-              name="profilePic"
-              value={inputs.profilePic}
-              onChange={handleChange}
-              className="w-full text-white rounded-lg border-gray-200 p-4 text-sm shadow-sm"
-              placeholder="Enter your profile picture URL (optional)"
+              placeholder="Enter your social accounts (LinkedIn)"
             />
           </div>
 
@@ -252,17 +238,18 @@ export default function Register() {
             <input
               type="text"
               id="achievements"
+              required="true"
               name="achievements"
               value={inputs.achievements}
               onChange={handleChange}
               className="w-full text-white rounded-lg border-gray-200 p-4 text-sm shadow-sm"
-              placeholder="Enter your achievements (optional)"
+              placeholder="Enter your achievements(A.I Certification, Hackathons, etc.)"
             />
           </div>
 
           <button
             type="submit"
-            className="block w-full text-white rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
+            className="block w-full text-white rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium "
           >
             Register
           </button>

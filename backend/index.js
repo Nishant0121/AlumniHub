@@ -30,10 +30,14 @@ mongoose
 const authRoutes = require("./routes/authroutes.js");
 const usersRoutes = require("./routes/usersroutes.js");
 
+const meetRoutes = require("./routes/meetrouter.js");
+
 // Use routes
 app.use("/api/auth", authRoutes);
 
 app.use("/api/users", usersRoutes);
+
+app.use("/api/meet", meetRoutes);
 
 const PORT = process.env.PORT || 4000;
 

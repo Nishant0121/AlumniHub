@@ -14,6 +14,7 @@ import Profile from "./pages/profile";
 import AllUsers from "./pages/allusers";
 import IndividualProfile from "./pages/individualprofile";
 import Connections from "./pages/connections";
+import Meet from "./components/meet";
 
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
@@ -24,7 +25,9 @@ function App() {
   return (
     <div className=" bg-white text-black">
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={authUser ? <Layout /> : <Landing />}>
+          <Route index element={<Home />} />
+        </Route>
         <Route
           path="/home"
           element={authUser ? <Layout /> : <Navigate to={"/login"} />}
@@ -36,6 +39,12 @@ function App() {
           element={authUser ? <Layout /> : <Navigate to={"/login"} />}
         >
           <Route index element={<h1>About</h1>} />
+        </Route>
+        <Route
+          path="/meet"
+          element={authUser ? <Layout /> : <Navigate to={"/login"} />}
+        >
+          <Route index element={<Meet />} />
         </Route>
         <Route
           path="/profile"

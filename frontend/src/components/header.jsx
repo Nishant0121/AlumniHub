@@ -50,7 +50,7 @@ export default function Header() {
           {/* <Link to={"/login"} className="px-1.5 w-fit mx-1.5">
             <CircleUserRound />
           </Link> */}
-          <div className="drawer-side z-50">
+          <div className="drawer-side z-50 scroll-container scroll-smooth">
             <label
               htmlFor="my-drawer"
               aria-label="close sidebar"
@@ -62,7 +62,7 @@ export default function Header() {
                   <X />
                 </label>
               </li>
-              <li>
+              <li className=" h-[100vh] scroll-container scroll-smooth">
                 <Notification />
               </li>
             </ul>

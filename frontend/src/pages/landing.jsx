@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Landing() {
   return (
     <div className="flex flex-col min-h-[100dvh]">
-      <header className="px-4 lg:px-6 h-14 flex items-center">
+      <header className="px-4 lg:px-6 h-14 flex justify-between items-center">
         <Link
           href="#"
           className="flex items-center justify-center"
@@ -12,36 +12,12 @@ export default function Landing() {
           <MountainIcon className="h-6 w-6" />
           <span className="sr-only">Student Connect</span>
         </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Features
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Pricing
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            About
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Contact
-          </Link>
-        </nav>
+        <button
+          className="inline-flex h-10 items-center justify-center rounded-md bg-indigo-600 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+          onClick={() => document.getElementById("my_modal_1").showModal()}
+        >
+          Get Started
+        </button>
       </header>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32">
@@ -68,7 +44,7 @@ export default function Landing() {
                 </button>
               </div>
               <img
-                src="/placeholder.svg"
+                src="https://cdn3.iconfinder.com/data/icons/resume-glyph-silhouettes/300/212546667Untitled-3-512.png"
                 width="550"
                 height="550"
                 alt="Hero"
@@ -104,7 +80,7 @@ export default function Landing() {
                 </button>
               </div>
               <img
-                src="/placeholder.svg"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7KGhPkzKeQthNssDQbYNepLQa7QwrLo_-NQ&s"
                 width="550"
                 height="310"
                 alt="Connect with Alumni"
@@ -117,7 +93,7 @@ export default function Landing() {
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
               <img
-                src="/placeholder.svg"
+                src="https://media.licdn.com/dms/image/D5612AQHXAbhKJ7pTEg/article-cover_image-shrink_720_1280/0/1708950195923?e=2147483647&v=beta&t=oZiQh1foOj2IhyOoYy1m_7haTlQHDbq2ZUvSXLnH4W0 "
                 width="550"
                 height="310"
                 alt="AI Chatbot"
@@ -176,7 +152,7 @@ export default function Landing() {
                 </button>
               </div>
               <img
-                src="/placeholder.svg"
+                src="https://pluspng.com/img-png/unlock-png-lock-unlock-icon-png-graphic-cave-1200.png"
                 width="550"
                 height="310"
                 alt="Career Guidance"
@@ -189,7 +165,7 @@ export default function Landing() {
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
               <img
-                src="/placeholder.svg"
+                src="https://hijobs.net/blog/wp-content/uploads/2014/04/HiRes.jpg"
                 width="550"
                 height="310"
                 alt="Placement Assistance"
@@ -225,12 +201,15 @@ export default function Landing() {
         <dialog id="my_modal_1" className="modal">
           <div className="modal-box bg-white">
             <div className=" flex flex-col gap-4">
-              <Link to={"/login"} className=" p-3 rounded-lg bg-indigo-500">
+              <Link
+                to={"/login"}
+                className=" p-3 rounded-lg bg-indigo-600 text-white"
+              >
                 Start as Student
               </Link>
               <Link
                 to={"/loginalumni"}
-                className=" p-3 rounded-lg bg-indigo-500"
+                className=" p-3 rounded-lg bg-indigo-600 text-white"
               >
                 Start as Alumni
               </Link>
