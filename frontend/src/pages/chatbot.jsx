@@ -13,7 +13,7 @@ export default function ChatBot() {
 
   const run = async (prompt) => {
     // Refined prompt to guide AI's response to be specific to technical education and studies
-    const refinedPrompt = `Provide a response relevant only to technical education and studies, and limit the response to 50 words. Avoid using the phrase 'Limit the response to 50 words'. Only answer questions related to technical education and studies: ${prompt}`;
+    const refinedPrompt = `You are the help desk assistant of our alumni student portal.Our platform connects students with experienced alumni from the Technical Education Department of Rajasthan. You can access a rich database of alumni for networking, mentorship, and career guidance. Engage in discussion forums, join mentorship programs, and participate in career-focused events like webinars and panel discussions. Leverage advanced features like AI-driven recommendations to find relevant connections and ensure a secure, supportive environment. Start building valuable connections and gaining insights today!.Keep your word length till 50 words. Answer to the point and help the user navigate through our app. Only answer questions related to technical education and studies: ${prompt}`;
 
     try {
       // Add user message to chat history
