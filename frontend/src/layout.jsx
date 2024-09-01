@@ -17,7 +17,7 @@ export default function Layout() {
         <div
           className={` ${
             isOpenMenu ? "flex" : "hidden"
-          } fixed top-0 left-0 min-h-[100vh] min-w-[40vw] bg-white shadow-md`}
+          } fixed top-0 left-0 z-40 min-h-[100vh] min-w-[40vw] bg-white shadow-md`}
         >
           <VerticleMenu className="" />
         </div>

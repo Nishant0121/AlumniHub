@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setInputs({
@@ -14,9 +18,31 @@ export default function Login() {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(inputs);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/auth/login/user",
+        {
+          email: inputs.email,
+          password: inputs.password,
+        }
+      );
+
+      // Handle successful login
+      console.log("Login successful", response.data);
+
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      localStorage.setItem("token", response.data.token);
+
+      // Redirect to a different page upon successful login
+      navigate("/home");
+      window.location.reload();
+    } catch (error) {
+      console.error("Login failed", error.response?.data);
+      setError(error.response?.data?.message || "An error occurred");
+    }
   };
 
   return (

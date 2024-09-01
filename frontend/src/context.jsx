@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export const AppContext = createContext();
 
@@ -12,6 +12,13 @@ export const AppProvider = ({ children }) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isOpenProfile, setisOpenProfile] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
+  const [authUser, setAuthUser] = useState(localStorage.getItem("user"));
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    setAuthUser(localStorage.getItem("token"));
+  });
+
   return (
     <AppContext.Provider
       value={{
@@ -21,6 +28,10 @@ export const AppProvider = ({ children }) => {
         setisOpenProfile,
         activeLink,
         setActiveLink,
+        authUser,
+        setAuthUser,
+        token,
+        setToken,
       }}
     >
       {children}
