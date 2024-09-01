@@ -12,25 +12,130 @@ export default function ChatBot() {
   const [chatHistory, setChatHistory] = useState([]);
 
   const run = async (prompt) => {
+    // Refined prompt to guide AI's response to be specific to technical education and studies
+    const refinedPrompt = `Provide a response relevant only to technical education and studies, and limit the response to 50 words. Avoid using the phrase 'Limit the response to 50 words'. Only answer questions related to technical education and studies: ${prompt}`;
+
     try {
+      // Add user message to chat history
       setChatHistory((prevHistory) => [
         ...prevHistory,
         { sender: "user", text: prompt },
       ]);
       setLoading(true);
-      const result = await model.generateContent(prompt);
+
+      // Request response from the AI model
+      const result = await model.generateContent(refinedPrompt);
       const response = await result.response;
       const text = await response.text();
 
-      // Update chat history with user's input and the AI's response
+      // Post-process the response to ensure it is within the desired scope and word limit
+      const filteredText = filterResponse(text);
+      const truncatedText = truncateResponse(filteredText, 50);
+
+      // Update chat history with the AI's response
       setChatHistory((prevHistory) => [
         ...prevHistory,
-        { sender: "ai", text: text },
+        { sender: "ai", text: truncatedText },
       ]);
-      setLoading(false);
     } catch (error) {
       console.error("Error generating AI response:", error);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  // Helper function to filter response to be relevant to technical education and studies
+  const filterResponse = (text) => {
+    // Example filter logic: you might want to implement more sophisticated filtering based on your needs
+    const keywords = [
+      "technical",
+      "education",
+      "study",
+      "engineering",
+      "science",
+      "technology",
+      "computer",
+      "programming",
+      "mechanical",
+      "electrical",
+      "civil",
+      "chemical",
+      "aerospace",
+      "structural",
+      "biomedical",
+      "environmental",
+      "industrial",
+      "systems",
+      "robotics",
+      "software",
+      "design",
+      "analysis",
+      "simulation",
+      "prototyping",
+      "CAD",
+      "CAM",
+      "thermodynamics",
+      "fluid mechanics",
+      "circuit design",
+      "control systems",
+      "materials science",
+      "manufacturing",
+      "optimization",
+      "data analysis",
+      "machine learning",
+      "artificial intelligence",
+      "signal processing",
+      "embedded systems",
+      "network engineering",
+      "cybersecurity",
+      "database management",
+      "systems integration",
+      "project management",
+      "modeling",
+      "testing",
+      "calibration",
+      "maintenance",
+      "quality assurance",
+      "reliability engineering",
+      "safety engineering",
+      "systems engineering",
+      "ergonomics",
+      "sustainability",
+      "lean manufacturing",
+      "six sigma",
+      "agile development",
+      "troubleshooting",
+      "Python",
+      "MATLAB",
+      "C++",
+      "Java",
+      "JavaScript",
+      "SQL",
+      "R",
+      "Simulink",
+      "LabVIEW",
+      "Git",
+      "Docker",
+      "Kubernetes",
+      "web",
+      "app",
+    ];
+
+    const containsKeyword = keywords.some((keyword) =>
+      text.toLowerCase().includes(keyword)
+    );
+    return containsKeyword
+      ? text
+      : "Response does not meet the criteria for technical education and studies.";
+  };
+
+  // Helper function to truncate response to a specified word limit
+  const truncateResponse = (text, wordLimit) => {
+    const words = text.split(" ");
+    if (words.length > wordLimit) {
+      return words.slice(0, wordLimit).join(" ") + "...";
+    }
+    return text;
   };
 
   const handleOnSubmit = (e) => {
