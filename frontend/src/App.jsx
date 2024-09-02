@@ -15,6 +15,7 @@ import AllUsers from "./pages/allusers";
 import IndividualProfile from "./pages/individualprofile";
 import Connections from "./pages/connections";
 import Meet from "./components/meet";
+import Messages from "./pages/messages";
 
 axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
@@ -63,6 +64,12 @@ function App() {
           element={authUser ? <Layout /> : <Navigate to={"/login"} />}
         >
           <Route index element={<IndividualProfile />} />
+        </Route>
+        <Route
+          path="/message/:receiverID"
+          element={authUser ? <Layout /> : <Navigate to={"/login"} />}
+        >
+          <Route index element={<Messages />} />
         </Route>
         <Route
           path="/myconnections"

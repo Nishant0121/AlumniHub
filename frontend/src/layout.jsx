@@ -30,11 +30,12 @@ export default function Layout() {
       </main>
       <Footer />
       <button
-        className="btn fixed text-white m-2 sm:m-3 md:m-5 lg:m-7 bottom-0 right-0"
+        className="btn fixed text-white m-2 sm:m-3 md:m-5 lg:m-7 top-0 md:top-auto md:bottom-0 left-0"
         onClick={() => document.getElementById("my_modal_3").showModal()}
       >
         <BotMessageSquare />
       </button>
+
       <dialog id="my_modal_3" className="modal ">
         <ChatBot />
       </dialog>

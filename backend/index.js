@@ -31,6 +31,7 @@ const authRoutes = require("./routes/authroutes.js");
 const usersRoutes = require("./routes/usersroutes.js");
 
 const meetRoutes = require("./routes/meetrouter.js");
+const messageRoutes = require("./routes/messageroutes.js");
 
 // Use routes
 app.use("/api/auth", authRoutes);
@@ -38,6 +39,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
 
 app.use("/api/meet", meetRoutes);
+
+app.use("/api/connect", messageRoutes);
 
 const PORT = process.env.PORT || 4000;
 

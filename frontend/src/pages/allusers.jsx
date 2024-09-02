@@ -99,6 +99,7 @@ export default function AllUsers() {
                   {user.description}
                 </p>
               </div>
+              <Link to={`/message/${user._id}`}>Chat</Link>
             </div>
           </Link>
         ))}

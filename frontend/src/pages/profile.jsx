@@ -36,12 +36,12 @@ export default function Profile() {
               </div>
             </div>
           </div>
-          <Link to={"/myconnections"} className=" ">
-            <h2 className=" font-semibold mb-2 py-2 px-3 rounded-md text-white bg-indigo-600">
+          <Link to={"/myconnections"} className=" my-3">
+            <h2 className=" font-semibold my-2 py-2 px-3 rounded-md text-white bg-indigo-600">
               Your Connections
             </h2>
           </Link>
-          <div>
+          {/* <div>
             <h2 className="text-xl font-semibold mb-2">Interests</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               <div className="p-4 flex flex-col items-center">
@@ -69,7 +69,7 @@ export default function Profile() {
                 <p className="text-center font-medium">Travel</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
