@@ -15,20 +15,14 @@ export default function Functions() {
               src="https://firebasestorage.googleapis.com/v0/b/the-gallery-3c000.appspot.com/o/images%2F1725071884674Designer%20(1).png?alt=media&token=c0776c5a-4f92-48dd-97fe-407e8c6dd095"
               alt=""
             />
-            <div className="absolute bottom-0 rounded-md inset-x-0 flex flex-col justify-center items-center text-center text-white bg-black bg-opacity-50 p-6 lg:items-start lg:text-left">
+            <div className="absolute bottom-0 rounded-md inset-x-0 flex flex-col justify-center items-center text-center text-white bg-black bg-opacity-50 p-2 lg:items-start lg:text-left">
               <h2 className="text-3xl font-bold sm:text-4xl">
                 Find your career path
               </h2>
 
-              <p className="mt-4 text-gray-200">
-                Get Started with us for free access to Mentorship programs,
-                Career guidance sessions, Placement assistance, Academic
-                support, Interaction Sessions, etc.
-              </p>
-
               <Link
                 to={"/login"}
-                className="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
+                className="mt-3 inline-block rounded bg-indigo-600 px-12 py-2 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
               >
                 Get Started Today
               </Link>
@@ -52,9 +46,9 @@ export default function Functions() {
                 </p>
               </Link>
             ) : (
-              <button
+              <Link
+                to={"/allusers"}
                 className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
-                onClick={() => document.getElementById("request").showModal()}
               >
                 <span className="inline-block rounded-lg bg-indigo-50 p-3">
                   <UserRoundSearch />
@@ -65,7 +59,7 @@ export default function Functions() {
                 <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                   See the pending connection requests.
                 </p>
-              </button>
+              </Link>
             )}
 
             <a
