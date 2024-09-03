@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { AppContext } from "../context";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Send } from "lucide-react";
 
@@ -9,6 +9,15 @@ export default function Messages() {
   const { authUser } = useContext(AppContext);
   const [messages, setMessages] = useState([]);
   const senderId = authUser._id;
+  const messagesEndRef = useRef(null); // Create a ref for the messages container
+
+  const [user, setUser] = useState({});
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -26,7 +35,25 @@ export default function Messages() {
     fetchMessages();
   }, [receiverID, senderId]);
 
-  console.log(messages);
+  useEffect(() => {
+    scrollToBottom(); // Scroll to the bottom whenever messages are updated
+  }, [messages]);
+
+  useEffect(() => {
+    // Fetch user details
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4000/api/users/get/user/${receiverID}`
+        );
+        setUser(response.data); // Set the user state with the response data
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+
+    fetchUser();
+  }, [receiverID]);
 
   const handleSend = async (event) => {
     event.preventDefault();
@@ -39,29 +66,20 @@ export default function Messages() {
         receiverID,
         message,
       });
-      console.log(response.data);
-      setMessages((prevMessages) => [...prevMessages, response.data]); // Update messages array with the new message
+      setMessages((prevMessages) => [...prevMessages, response.data]);
+      window.location.reload(); // Update messages array with the new message
+      scrollToBottom(); // Scroll to the bottom after sending a message
     } catch (error) {
       console.error("Error sending message:", error);
     }
   };
 
   return (
-    <div className="flex flex-col h-[90vh] rounded-md">
-      <header className="bg-primary text-primary-foreground mt-1 py-2 px-6 flex rounded-md items-center justify-between">
-        <h1 className="text-xl font-bold">{authUser.name}</h1>
-        <div className="flex items-center gap-4">
-          <button size="icon">
-            <SearchIcon className="w-5 h-5" />
-            <span className="sr-only">Search</span>
-          </button>
-          <button size="icon">
-            <MoveVerticalIcon className="w-5 h-5" />
-            <span className="sr-only">More options</span>
-          </button>
-        </div>
+    <div className="flex flex-col h-[90vh] rounded-md border shadow-md scroll-container">
+      <header className=" shadow-md mt-1 py-2 px-6 flex rounded-md items-center justify-between">
+        <h1 className="text-xl font-bold text-vlack">{user.name}</h1>
       </header>
-      <div className="flex-1 overflow-auto p-6">
+      <div className="flex-1 overflow-auto p-6 scroll-container">
         <div className="space-y-4">
           {messages.map((msg) => (
             <div
@@ -84,6 +102,8 @@ export default function Messages() {
               </div>
             </div>
           ))}
+          <div ref={messagesEndRef} />{" "}
+          {/* This is the empty div to scroll into view */}
         </div>
       </div>
       <form
@@ -127,47 +147,6 @@ function MicIcon(props) {
       <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
       <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
       <line x1="12" x2="12" y1="19" y2="22" />
-    </svg>
-  );
-}
-
-function MoveVerticalIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polyline points="8 18 12 22 16 18" />
-      <polyline points="8 6 12 2 16 6" />
-      <line x1="12" x2="12" y1="2" y2="22" />
-    </svg>
-  );
-}
-
-function SearchIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
     </svg>
   );
 }

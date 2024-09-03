@@ -15,6 +15,9 @@ export default function RegisterAlumni() {
     mobile: "",
     email: "",
     password: "",
+    socialAccounts: "",
+    careerPath: "",
+    achievements: "",
   });
 
   const handleChange = (e) => {
@@ -37,10 +40,11 @@ export default function RegisterAlumni() {
       mobile: inputs.mobile,
       email: inputs.email,
       password: inputs.password,
-      socialAccounts: inputs.socialAccounts, // Include if optional fields are used
-      profilePic: inputs.profilePic, // Include if optional fields are used
-      careerPath: inputs.careerPath, // Include if optional fields are used // Include if optional fields are used
-      achievements: inputs.achievements || [],
+      socialAccounts: inputs.socialAccounts,
+      careerPath: inputs.careerPath,
+      achievements: inputs.achievements
+        .split(",")
+        .map((achievement) => achievement.trim()),
     };
 
     try {
@@ -215,6 +219,50 @@ export default function RegisterAlumni() {
             />
           </div>
 
+          <div className="flex flex-col m-0 items-start justify-center">
+            <label htmlFor="socialAccounts" className="text-black">
+              Social Accounts (comma-separated)
+            </label>
+            <input
+              type="text"
+              id="socialAccounts"
+              name="socialAccounts"
+              value={inputs.socialAccounts}
+              onChange={handleChange}
+              className="w-full text-white rounded-lg border-gray-200 p-4 text-sm shadow-sm"
+              placeholder="Enter your social accounts"
+            />
+          </div>
+
+          <div className="flex flex-col m-0 items-start justify-center">
+            <label htmlFor="careerPath" className="text-black">
+              Career Path
+            </label>
+            <textarea
+              id="careerPath"
+              name="careerPath"
+              value={inputs.careerPath}
+              onChange={handleChange}
+              className="w-full text-white rounded-lg border-gray-200 p-4 text-sm shadow-sm"
+              placeholder="Describe your career path"
+            />
+          </div>
+
+          <div className="flex flex-col m-0 items-start justify-center">
+            <label htmlFor="achievements" className="text-black">
+              Achievements (comma-separated)
+            </label>
+            <input
+              type="text"
+              id="achievements"
+              name="achievements"
+              value={inputs.achievements}
+              onChange={handleChange}
+              className="w-full text-white rounded-lg border-gray-200 p-4 text-sm shadow-sm"
+              placeholder="Enter your achievements"
+            />
+          </div>
+
           <button
             type="submit"
             className="block w-full text-white rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium "
@@ -224,7 +272,7 @@ export default function RegisterAlumni() {
 
           <p className="text-center text-sm text-gray-500">
             Already have an account?{" "}
-            <Link className="underline" to={"/login"}>
+            <Link className="underline" to={"/loginalumni"}>
               Sign in
             </Link>
           </p>

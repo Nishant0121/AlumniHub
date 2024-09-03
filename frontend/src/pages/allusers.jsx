@@ -99,7 +99,12 @@ export default function AllUsers() {
                   {user.description}
                 </p>
               </div>
-              <Link to={`/message/${user._id}`}>Chat</Link>
+              <Link
+                className="bg-indigo-500 px-3 py-1.5 rounded-md text-white"
+                to={`/message/${user._id}`}
+              >
+                Chat
+              </Link>
             </div>
           </Link>
         ))}

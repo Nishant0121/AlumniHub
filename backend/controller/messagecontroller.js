@@ -26,7 +26,7 @@ const SendMessage = async (req, res) => {
     conversation.messages.push(newMessage._id);
     await conversation.save();
 
-    res.status(200).json({ message: "Message sent successfully" });
+    res.status(200).json(message);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

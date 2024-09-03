@@ -42,6 +42,7 @@ export default function Meet() {
       console.log("Meeting scheduled successfully:", response.data);
 
       // Optionally, you can clear the form or show a success message
+      window.location.reload();
       setStartTime("");
       setMeetingLink("");
       setMeetingTopic("");
@@ -72,14 +73,8 @@ export default function Meet() {
                     type="time"
                     value={startTime}
                     onChange={(e) => setStartTime(e.target.value)}
-                    className="w-full p-3 text-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full p-3 text-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   />
-                  <button
-                    type="button"
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400"
-                  >
-                    <ClockIcon className="h-5 w-5" />
-                  </button>
                 </div>
               </div>
 
@@ -96,7 +91,7 @@ export default function Meet() {
                   value={meetingLink}
                   onChange={(e) => setMeetingLink(e.target.value)}
                   placeholder="https://example.com/meeting"
-                  className="mt-2 w-full p-3 text-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-2 w-full p-3 text-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 />
               </div>
 
@@ -113,7 +108,7 @@ export default function Meet() {
                   value={meetingTopic}
                   onChange={(e) => setMeetingTopic(e.target.value)}
                   placeholder="Enter a meeting topic"
-                  className="mt-2 w-full p-3 text-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-2 w-full p-3 text-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 />
               </div>
 
@@ -136,7 +131,7 @@ export default function Meet() {
               No meetings scheduled in the last 12 hours.
             </p>
           ) : (
-            <ul className=" grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ul className=" grid grid-cols-1 gap-4">
               {meetings.map((meeting) => (
                 <li
                   key={meeting._id}

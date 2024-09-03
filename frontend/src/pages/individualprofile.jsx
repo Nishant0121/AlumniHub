@@ -9,7 +9,7 @@ import {
   TrophyIcon,
 } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../context";
 
 export default function IndividualProfile() {
@@ -121,12 +121,20 @@ export default function IndividualProfile() {
             </div>
           )}
         </div>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white mt-4 font-bold py-2 px-4 rounded"
-          onClick={handleConnect}
-        >
-          Connect
-        </button>
+        <div className="flex justify-start space-x-3">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white mt-4 font-bold py-2 px-4 rounded"
+            onClick={handleConnect}
+          >
+            Connect
+          </button>
+          <Link
+            to={`/message/${user._id}`}
+            className="bg-blue-500 hover:bg-blue-700 text-white mt-4 font-bold py-2 px-4 rounded"
+          >
+            Chat
+          </Link>
+        </div>
       </div>
     </div>
   );

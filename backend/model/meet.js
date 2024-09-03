@@ -24,7 +24,7 @@ const meetingSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  UID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  UID: { type: mongoose.Schema.Types.ObjectId, ref: "Alumni" },
 });
 
 const Meeting = mongoose.model("Meet", meetingSchema);
